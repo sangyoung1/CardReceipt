@@ -169,7 +169,7 @@
             // clbName
             // 
             this.clbName.FormattingEnabled = true;
-            this.clbName.Location = new System.Drawing.Point(158, 296);
+            this.clbName.Location = new System.Drawing.Point(158, 295);
             this.clbName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.clbName.Name = "clbName";
             this.clbName.Size = new System.Drawing.Size(187, 104);
