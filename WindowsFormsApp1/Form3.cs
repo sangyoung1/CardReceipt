@@ -32,14 +32,6 @@ namespace WindowsFormsApp1
             dataGridView1.Columns[3].HeaderText = "카드번호";
             dataGridView1.Columns[4].HeaderText = "투입인력";
             dataGridView1.Columns[5].Visible = false;
-            if(prolist.Count < 1)
-            {
-                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            }
-            else
-            {
-                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            }
         }
 
         private List<Project> getProject()
@@ -106,6 +98,14 @@ namespace WindowsFormsApp1
         {
             prolist = getProject();
             dataGridView1.DataSource = prolist;
+            if (prolist.Count < 1)
+            {
+                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            }
+            else
+            {
+                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
