@@ -16,7 +16,7 @@ using System.Configuration;
 
 namespace WindowsFormsApp1
 {
-    public partial class Form1 : Form
+    public partial class Main : Form
     {
         DataSet ds = new DataSet();
         DataTable dt = new DataTable();
@@ -26,7 +26,7 @@ namespace WindowsFormsApp1
         bool isSubtotal = false;
         bool isArrange = false;
 
-        public Form1()
+        public Main()
         {
             InitializeComponent();
         }
@@ -242,11 +242,10 @@ where not exists(select 1 from card_receipt where usedate = :usedate) ";
                 {
                     Excel.Worksheet ws = eworkbook.Sheets.Add();
                     ws.Name = "Card_Receipt";
-                    ws.Cells[1, 1] = "카드번호";
-                    ws.Cells[1, 2] = "합계";
 
                     for (int colHeaderindex = 1; colHeaderindex <= dt.Columns.Count; colHeaderindex++)
                     {
+                        ws.Cells[1, colHeaderindex] = dataGridView1.Columns[colHeaderindex - 1].HeaderText;
                         ws.Cells[1, colHeaderindex].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.LightGray);
                     }
 
@@ -324,6 +323,7 @@ where not exists(select 1 from card_receipt where usedate = :usedate) ";
 
         private void button3_Click(object sender, EventArgs e)
         {
+            ds.Tables.Clear();
             isSubtotal = true;
             string connStr = ConfigurationManager.ConnectionStrings["MyDB"].ConnectionString;
             OracleConnection oraConn = new OracleConnection(connStr);
@@ -341,6 +341,7 @@ where not exists(select 1 from card_receipt where usedate = :usedate) ";
 
         private void button4_Click(object sender, EventArgs e)
         {
+            ds.Tables.Clear();
             isSubtotal = true;
             string connStr = ConfigurationManager.ConnectionStrings["MyDB"].ConnectionString;
             OracleConnection oraConn = new OracleConnection(connStr);
@@ -358,6 +359,7 @@ where not exists(select 1 from card_receipt where usedate = :usedate) ";
 
         private void button5_Click(object sender, EventArgs e)
         {
+            ds.Tables.Clear();
             isSubtotal = true;
             string connStr = ConfigurationManager.ConnectionStrings["MyDB"].ConnectionString;
             OracleConnection oraConn = new OracleConnection(connStr);
@@ -377,6 +379,28 @@ where not exists(select 1 from card_receipt where usedate = :usedate) ";
         private void button7_Click(object sender, EventArgs e)
         {
             Form3 frm = new Form3();
+            frm.ShowDialog();
+        }
+
+        private void OracleSelect(string sql)
+        {
+            string connStr = ConfigurationManager.ConnectionStrings["MyDB"].ConnectionString;
+            OracleConnection oraConn = new OracleConnection(connStr);
+            OracleCommand oraCmd = oraConn.CreateCommand();
+            oraCmd.CommandText = sql; 
+            oraConn.Open();
+            OracleDataAdapter adapt = new OracleDataAdapter(oraCmd);
+            adapt.SelectCommand = oraCmd;
+            adapt.Fill(ds);
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void btnCard_Click(object sender, EventArgs e)
+        {
+            CardInfo frm = new CardInfo();
             frm.ShowDialog();
         }
     }

@@ -37,7 +37,6 @@ namespace WindowsFormsApp1
             date = pdate.Replace(" ", "").Split('~');
             card = pcard.Replace(" ", "").Split(',');
             name = pmember.Replace(" ", "").Split(',');
-            MessageBox.Show(name[0]);
             cboCode.Text = pcode;
             txtName.Text = pname;
             dtpStart.Value = Convert.ToDateTime(date[0]);
@@ -196,7 +195,7 @@ namespace WindowsFormsApp1
                 {
                     if(!isUpdate)
                     {
-                        oraCmd.CommandText = "INSERT INTO Project (projectid, projectcode, projectname, projectdate, cardnumber, member) VALUES (projectid.nextval, :projectcode, :projectname, :projectdate, :cardnumber, :member) ";
+                        oraCmd.CommandText = "INSERT INTO Project (projectid, projectcode, projectname, projectdate, cardnumber, member) VALUES (Project_ID.nextval, :projectcode, :projectname, :projectdate, :cardnumber, :member) ";
                     }
                     else
                     {

@@ -39,7 +39,12 @@ namespace WindowsFormsApp1
         public string ENAME { get; set; }
     }
 
-
+    public class ProAmount
+    {
+        public string ProjectCode { get; set; }
+        public decimal Amount { get; set; }
+    }
+    
     public class Project
     {
         public string ProjectCode { get; set; }
@@ -48,5 +53,26 @@ namespace WindowsFormsApp1
         public string CardNumber { get; set; }
         public string Member { get; set; }
         public decimal ProjectId { get; set; }
+    }
+
+    public class Details
+    {
+        public string USEDATE { get; set; }
+        public string USEPLACE { get; set; }
+        public string CARDNUMBER { get; set; }
+        public string AMOUNT { get; set; }
+        public string PURPOSE { get; set; }
+        public string CLASSIFICATION { get; set; }
+        public string CONTENT { get; set; }
+        public string USERNAEM { get; set; }
+    }
+
+    public class CardData
+    {
+        public string CardID { get; set; }
+        public string CardNumber { get; set; }
+        public string CardUser { get; set; }
+        public string CardLimit { get; set; }
+    
     }
 }

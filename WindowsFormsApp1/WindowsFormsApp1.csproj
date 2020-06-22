@@ -50,12 +50,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CardTable.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="CardInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="CardInfo.Designer.cs">
+      <DependentUpon>CardInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CardInUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CardInUp.Designer.cs">
+      <DependentUpon>CardInUp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CardTable.cs" />
+    <Compile Include="DetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DetailForm.Designer.cs">
+      <DependentUpon>DetailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="Form2.cs">
       <SubType>Form</SubType>
@@ -72,8 +90,17 @@
     <Compile Include="Helper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="CardInfo.resx">
+      <DependentUpon>CardInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CardInUp.resx">
+      <DependentUpon>CardInUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DetailForm.resx">
+      <DependentUpon>DetailForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>

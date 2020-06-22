@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApp1
 {
-    partial class Form1
+    partial class Main
     {
         /// <summary>
         /// Required designer variable.
@@ -31,6 +31,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnCard = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -62,6 +64,8 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnCard);
+            this.panel1.Controls.Add(this.button6);
             this.panel1.Controls.Add(this.button7);
             this.panel1.Controls.Add(this.button5);
             this.panel1.Controls.Add(this.button4);
@@ -76,6 +80,28 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1459, 62);
             this.panel1.TabIndex = 2;
+            // 
+            // btnCard
+            // 
+            this.btnCard.Location = new System.Drawing.Point(309, 5);
+            this.btnCard.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnCard.Name = "btnCard";
+            this.btnCard.Size = new System.Drawing.Size(115, 51);
+            this.btnCard.TabIndex = 11;
+            this.btnCard.Text = "카드관리";
+            this.btnCard.UseVisualStyleBackColor = true;
+            this.btnCard.Click += new System.EventHandler(this.btnCard_Click);
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(175, 5);
+            this.button6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(115, 51);
+            this.button6.TabIndex = 10;
+            this.button6.Text = "인사관리";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button7
             // 
@@ -167,7 +193,7 @@
             this.dataGridView1.Size = new System.Drawing.Size(1459, 604);
             this.dataGridView1.TabIndex = 3;
             // 
-            // Form1
+            // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -175,7 +201,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "Form1";
+            this.Name = "Main";
             this.Text = "Form1";
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -196,5 +222,7 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button btnCard;
+        private System.Windows.Forms.Button button6;
     }
 }

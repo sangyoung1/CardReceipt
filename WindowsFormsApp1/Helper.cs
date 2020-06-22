@@ -30,7 +30,7 @@ namespace WindowsFormsApp1
                 }
                 return list;
             }
-            catch (Exception err)
+            catch 
             {
                 return null;
             }
