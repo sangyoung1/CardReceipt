@@ -104,7 +104,7 @@ namespace WindowsFormsApp1
                     }
                     else
                     {
-                        oraCmd.CommandText = $"UPDATE Project SET  cardnumber = :cardnumber , carduser =:carduser, cardlimit=:cardlimit WHERE CardID = {cid}";
+                        oraCmd.CommandText = $"UPDATE Card_Data SET  cardnumber = :cardnumber , carduser =:carduser, cardlimit=:cardlimit WHERE CardID = {cid}";
                     }
                     oraCmd.Connection = oraConn;
                     oraCmd.Connection.Open();

@@ -29,15 +29,17 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnInsert = new System.Windows.Forms.Button();
             this.cboName = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button5 = new System.Windows.Forms.Button();
             this.btnDetails = new System.Windows.Forms.Button();
+            this.btnExcel = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -56,27 +58,27 @@
             this.dataGridView1.Size = new System.Drawing.Size(805, 346);
             this.dataGridView1.TabIndex = 0;
             // 
-            // button1
+            // btnUpdate
             // 
-            this.button1.Location = new System.Drawing.Point(174, 431);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(106, 55);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "수정";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnUpdate.Location = new System.Drawing.Point(174, 431);
+            this.btnUpdate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(106, 55);
+            this.btnUpdate.TabIndex = 1;
+            this.btnUpdate.Text = "수정";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
+            // btnDelete
             // 
-            this.button2.Location = new System.Drawing.Point(326, 431);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(106, 55);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "삭제";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnDelete.Location = new System.Drawing.Point(326, 431);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(106, 55);
+            this.btnDelete.TabIndex = 2;
+            this.btnDelete.Text = "삭제";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -89,16 +91,16 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // button4
+            // btnInsert
             // 
-            this.button4.Location = new System.Drawing.Point(24, 431);
-            this.button4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(106, 55);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "등록";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.btnInsert.Location = new System.Drawing.Point(24, 431);
+            this.btnInsert.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnInsert.Name = "btnInsert";
+            this.btnInsert.Size = new System.Drawing.Size(106, 55);
+            this.btnInsert.TabIndex = 4;
+            this.btnInsert.Text = "등록";
+            this.btnInsert.UseVisualStyleBackColor = true;
+            this.btnInsert.Click += new System.EventHandler(this.button4_Click);
             // 
             // cboName
             // 
@@ -131,10 +133,10 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(722, 13);
+            this.button5.Location = new System.Drawing.Point(467, 29);
             this.button5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(106, 55);
+            this.button5.Size = new System.Drawing.Size(106, 38);
             this.button5.TabIndex = 8;
             this.button5.Text = "초기화";
             this.button5.UseVisualStyleBackColor = true;
@@ -151,18 +153,30 @@
             this.btnDetails.UseVisualStyleBackColor = true;
             this.btnDetails.Click += new System.EventHandler(this.button6_Click);
             // 
+            // btnExcel
+            // 
+            this.btnExcel.Location = new System.Drawing.Point(723, 12);
+            this.btnExcel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnExcel.Name = "btnExcel";
+            this.btnExcel.Size = new System.Drawing.Size(106, 55);
+            this.btnExcel.TabIndex = 10;
+            this.btnExcel.Text = "엑셀저장";
+            this.btnExcel.UseVisualStyleBackColor = true;
+            this.btnExcel.Click += new System.EventHandler(this.btnExcel_Click);
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(848, 499);
+            this.Controls.Add(this.btnExcel);
             this.Controls.Add(this.btnDetails);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.btnInsert);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnDelete);
+            this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.dataGridView1);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form3";
@@ -178,14 +192,16 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnInsert;
         private System.Windows.Forms.ComboBox cboName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button btnDetails;
+        private System.Windows.Forms.Button btnExcel;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }

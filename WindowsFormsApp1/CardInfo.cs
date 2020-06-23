@@ -34,7 +34,7 @@ namespace WindowsFormsApp1
         {
             using (OracleCommand oraCmd = new OracleCommand())
             {
-                oraCmd.CommandText = "SELECT CardNumber, CardUser, CardLimit, CardID FROM Card_Data";
+                oraCmd.CommandText = "SELECT CardNumber, CardUser, CardLimit, CardID FROM Card_Data ORDER BY CardID";
                 oraCmd.Connection = oraConn;
                 oraCmd.Connection.Open();
                 OracleDataReader reader = oraCmd.ExecuteReader();
@@ -85,6 +85,22 @@ namespace WindowsFormsApp1
 
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            string cardID = dataGridView1[3, dataGridView1.CurrentRow.Index].Value.ToString();
+
+            using (OracleCommand oraCmd = new OracleCommand())
+            {
+                oraCmd.CommandText = $"DELETE FROM Card_Data WHERE CardID = {cardID}";
+                oraCmd.Connection = oraConn;
+                oraCmd.Connection.Open();
+                oraCmd.ExecuteNonQuery();
+                oraCmd.Connection.Close();
+            }
+            MessageBox.Show("삭제완료");
+            DataBindig();
         }
     }
 }

@@ -8,8 +8,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.Office.Interop.Excel;
 using Oracle.ManagedDataAccess.Client;
+using Excel = Microsoft.Office.Interop.Excel;
+using System.IO;
+using System.Reflection;
 
 namespace WindowsFormsApp1
 {
@@ -19,7 +21,7 @@ namespace WindowsFormsApp1
         List<Project> prolist;
         string[] date;
         string[] card;
-
+        DataTable griddt = new DataTable();
         public Form3()
         {
             InitializeComponent();
@@ -64,7 +66,7 @@ namespace WindowsFormsApp1
             string pid = dataGridView1[6, dataGridView1.CurrentRow.Index].Value.ToString();
 
             Form2 frm = new Form2(pcode, pname, pdate, pcard, pmember, pid, pmanager);
-            if(frm.ShowDialog() == DialogResult.OK)
+            if (frm.ShowDialog() == DialogResult.OK)
             {
                 DataBinding();
             }
@@ -114,7 +116,7 @@ namespace WindowsFormsApp1
             dataGridView1.Columns[4].HeaderText = "카드번호";
             dataGridView1.Columns[5].HeaderText = "투입인력";
             dataGridView1.Columns[6].Visible = false;
-            
+
             dataGridView1.ClearSelection();
         }
 
@@ -135,17 +137,21 @@ namespace WindowsFormsApp1
                 cboName.Items.Add(item.ProjectName);
             }
         }
-        
+
         private void cboName_SelectedIndexChanged(object sender, EventArgs e)
         {
+            btnInsert.Enabled = false;
+            btnUpdate.Enabled = false;
+            btnDelete.Enabled = false;
+
             var list = (from project in prolist
                         where project.ProjectName == cboName.Text
                         select project).ToList();
 
             foreach (var item in list)
             {
-               date = item.ProjectDate.Replace(" ", "").Split('~');
-               card = item.CardNumber.Replace(" ", "").Split(',');
+                date = item.ProjectDate.Replace(" ", "").Split('~');
+                card = item.CardNumber.Replace(" ", "").Split(',');
             }
 
             List<ProAmount> amountlist = new List<ProAmount>();
@@ -158,7 +164,7 @@ namespace WindowsFormsApp1
                 oraCmd.Parameters.Add(new OracleParameter("date1", date[0]));
                 oraCmd.Parameters.Add(new OracleParameter("date2", date[1]));
                 oraCmd.Parameters.Add(new OracleParameter("card1", card[0]));
-                if(card.Length > 1)
+                if (card.Length > 1)
                 {
                     oraCmd.Parameters.Add(new OracleParameter("card2", card[1]));
                 }
@@ -183,14 +189,19 @@ namespace WindowsFormsApp1
             dataGridView1.Columns[2].HeaderText = "카드번호";
             dataGridView1.Columns[3].HeaderText = "사용금액";
             dataGridView1.Columns[4].HeaderText = "남은금액";
-
+            
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             btnDetails.Visible = true;
+
+            griddt = Helper.LinqQueryToDataTable(cardlist);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             DataBinding();
+            btnInsert.Enabled = true;
+            btnUpdate.Enabled = true;
+            btnDelete.Enabled = true;
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -198,6 +209,73 @@ namespace WindowsFormsApp1
             string cardnum = dataGridView1[2, dataGridView1.CurrentRow.Index].Value.ToString();
             DetailForm frm = new DetailForm(date[0], date[1], cardnum);
             frm.Show();
+        }
+
+        private void btnExcel_Click(object sender, EventArgs e)
+        {
+            Excel.Application ap = new Excel.Application();
+            Excel.Workbook eworkbook = ap.Workbooks.Add();
+
+            DataSet dsGrid = new DataSet();
+            dsGrid.Tables.Add(griddt);
+
+            foreach (DataTable dt in dsGrid.Tables)
+            {
+                Excel.Worksheet ws = eworkbook.Sheets.Add();
+                ws.Name = "Project_Card";
+                ws.Cells[1, 1] = "프로젝트명";
+                ws.Cells[1, 2] = "프로젝트기간";
+                ws.Cells[1, 3] = "카드번호";
+                ws.Cells[1, 4] = "사용금액";
+                ws.Cells[1, 5] = "남은금액";
+
+                for (int colHeaderindex = 1; colHeaderindex <= dt.Columns.Count; colHeaderindex++)
+                {
+                    //ws.Cells[1, colHeaderindex] = dt.Columns[colHeaderindex - 1].ColumnName;
+                    ws.Cells[1, colHeaderindex].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.LightGray);
+                }
+
+                for (int rowindex = 0; rowindex < dt.Rows.Count; rowindex++)
+                {
+                    for (int colindex = 0; colindex < dt.Columns.Count; colindex++)
+                    {
+                        ws.Cells[rowindex + 2, colindex + 1] = dt.Rows[rowindex].ItemArray[colindex].ToString();
+                    }
+                }
+                ws.Columns.AutoFit();
+            }
+
+            saveFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            saveFileDialog1.Title = "Excel 저장위치 지정";
+            saveFileDialog1.DefaultExt = "xlsx";
+            saveFileDialog1.Filter = "Xlsx files(*.xlsx)|*.xlsx|Xls files(*.xls)|*.xls";
+            saveFileDialog1.ShowDialog();
+
+            if (saveFileDialog1.FileName.Length > 0)
+            {
+                try
+                {
+                    foreach (var item in saveFileDialog1.FileNames)
+                    {
+                        string savePath = item;
+                        if (Path.GetExtension(savePath) == ".xls")
+                        {
+                            eworkbook.SaveAs(savePath, Excel.XlFileFormat.xlWorkbookNormal);
+                        }
+                        else if (Path.GetExtension(savePath) == ".xlsx")
+                        {
+                            eworkbook.SaveAs(savePath, Excel.XlFileFormat.xlOpenXMLWorkbook);
+                        }
+                        eworkbook.Close();
+                        ap.Quit();
+                    }
+                    MessageBox.Show("Excel 저장 완료");
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.Message);
+                }
+            }
         }
     }
 }
