@@ -42,11 +42,13 @@
             this.label6 = new System.Windows.Forms.Label();
             this.clbCard = new System.Windows.Forms.CheckedListBox();
             this.clbName = new System.Windows.Forms.CheckedListBox();
+            this.cboManager = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(401, 412);
+            this.button1.Location = new System.Drawing.Point(401, 452);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 42);
@@ -57,7 +59,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(301, 412);
+            this.button2.Location = new System.Drawing.Point(301, 452);
             this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 42);
@@ -69,7 +71,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(50, 31);
+            this.label1.Location = new System.Drawing.Point(28, 37);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(102, 15);
             this.label1.TabIndex = 2;
@@ -77,7 +79,7 @@
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(158, 81);
+            this.txtName.Location = new System.Drawing.Point(158, 83);
             this.txtName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(135, 25);
@@ -87,7 +89,7 @@
             // 
             this.dtpStart.CustomFormat = "yyyy-MM-dd";
             this.dtpStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpStart.Location = new System.Drawing.Point(158, 131);
+            this.dtpStart.Location = new System.Drawing.Point(158, 171);
             this.dtpStart.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtpStart.Name = "dtpStart";
             this.dtpStart.Size = new System.Drawing.Size(135, 25);
@@ -96,7 +98,7 @@
             // cboCode
             // 
             this.cboCode.FormattingEnabled = true;
-            this.cboCode.Location = new System.Drawing.Point(158, 29);
+            this.cboCode.Location = new System.Drawing.Point(158, 31);
             this.cboCode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cboCode.Name = "cboCode";
             this.cboCode.Size = new System.Drawing.Size(146, 23);
@@ -105,7 +107,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(50, 84);
+            this.label2.Location = new System.Drawing.Point(28, 90);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(82, 15);
             this.label2.TabIndex = 6;
@@ -114,7 +116,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(50, 136);
+            this.label3.Location = new System.Drawing.Point(28, 182);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(102, 15);
             this.label3.TabIndex = 7;
@@ -124,7 +126,7 @@
             // 
             this.dtpEnd.CustomFormat = "yyyy-MM-dd";
             this.dtpEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpEnd.Location = new System.Drawing.Point(333, 131);
+            this.dtpEnd.Location = new System.Drawing.Point(333, 171);
             this.dtpEnd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtpEnd.Name = "dtpEnd";
             this.dtpEnd.Size = new System.Drawing.Size(143, 25);
@@ -133,7 +135,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(305, 137);
+            this.label4.Location = new System.Drawing.Point(305, 177);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(18, 15);
             this.label4.TabIndex = 9;
@@ -142,7 +144,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(50, 190);
+            this.label5.Location = new System.Drawing.Point(28, 236);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(37, 15);
             this.label5.TabIndex = 10;
@@ -151,7 +153,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(50, 296);
+            this.label6.Location = new System.Drawing.Point(28, 342);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(67, 15);
             this.label6.TabIndex = 11;
@@ -160,7 +162,7 @@
             // clbCard
             // 
             this.clbCard.FormattingEnabled = true;
-            this.clbCard.Location = new System.Drawing.Point(158, 190);
+            this.clbCard.Location = new System.Drawing.Point(158, 230);
             this.clbCard.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.clbCard.Name = "clbCard";
             this.clbCard.Size = new System.Drawing.Size(187, 84);
@@ -169,17 +171,37 @@
             // clbName
             // 
             this.clbName.FormattingEnabled = true;
-            this.clbName.Location = new System.Drawing.Point(158, 295);
+            this.clbName.Location = new System.Drawing.Point(158, 335);
             this.clbName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.clbName.Name = "clbName";
             this.clbName.Size = new System.Drawing.Size(187, 104);
             this.clbName.TabIndex = 14;
             // 
+            // cboManager
+            // 
+            this.cboManager.FormattingEnabled = true;
+            this.cboManager.Location = new System.Drawing.Point(158, 126);
+            this.cboManager.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cboManager.Name = "cboManager";
+            this.cboManager.Size = new System.Drawing.Size(135, 23);
+            this.cboManager.TabIndex = 16;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(28, 134);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(117, 15);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "프로젝트 담당자";
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(513, 475);
+            this.ClientSize = new System.Drawing.Size(513, 515);
+            this.Controls.Add(this.cboManager);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.clbName);
             this.Controls.Add(this.clbCard);
             this.Controls.Add(this.label6);
@@ -219,5 +241,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckedListBox clbCard;
         private System.Windows.Forms.CheckedListBox clbName;
+        private System.Windows.Forms.ComboBox cboManager;
+        private System.Windows.Forms.Label label7;
     }
 }

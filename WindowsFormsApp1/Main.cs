@@ -107,7 +107,7 @@ namespace WindowsFormsApp1
                 ct.PURPOSE = dataGridView1[6, i].Value.ToString();
                 ct.CONTENT = dataGridView1[7, i].Value.ToString();
                 ct.DEPARTMENT = dataGridView1[8, i].Value.ToString();
-                ct.USERNAEM = dataGridView1[9, i].Value.ToString();
+                ct.USERNAME = dataGridView1[9, i].Value.ToString();
                 ct.RESOLUTION = dataGridView1[10, i].Value.ToString();
                 ct.OTHERS = dataGridView1[11, i].Value.ToString();
 
@@ -156,7 +156,7 @@ namespace WindowsFormsApp1
                 oraCmd.CommandText = @"insert into card_receipt (type, usedate, useplace, card, cardnumber, amount, purpose, projectcode, classification, content, department, username, resolution, others) 
 select :type, :usedate, :useplace, :card, :cardnumber, :amount, :purpose, :projectcode, :classification, :content, :department, :username, :resolution, :others
 from dual
-where not exists(select 1 from card_receipt where usedate = :usedate) ";
+where not exists(select 1 from card_receipt where usedate = :usedate)";
                 oraCmd.Connection = oraConn;
                 foreach (var item in cardlist)
                 {
@@ -172,7 +172,7 @@ where not exists(select 1 from card_receipt where usedate = :usedate) ";
                     oraCmd.Parameters.Add(new OracleParameter("classification", item.CLASSIFICATION));
                     oraCmd.Parameters.Add(new OracleParameter("content", item.CONTENT));
                     oraCmd.Parameters.Add(new OracleParameter("department", item.DEPARTMENT));
-                    oraCmd.Parameters.Add(new OracleParameter("username", item.USERNAEM));
+                    oraCmd.Parameters.Add(new OracleParameter("username", item.USERNAME));
                     oraCmd.Parameters.Add(new OracleParameter("resolution", item.RESOLUTION));
                     oraCmd.Parameters.Add(new OracleParameter("others", item.OTHERS));
                     oraCmd.ExecuteNonQuery();

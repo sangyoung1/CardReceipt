@@ -29,7 +29,7 @@ namespace WindowsFormsApp1
             OracleConnStr();
         }
 
-        public Form2(string pcode, string pname, string pdate, string pcard, string pmember, string pid)
+        public Form2(string pcode, string pname, string pdate, string pcard, string pmember, string pid, string pmanager)
         {
             InitializeComponent();
             OracleConnStr();
@@ -39,6 +39,7 @@ namespace WindowsFormsApp1
             name = pmember.Replace(" ", "").Split(',');
             cboCode.Text = pcode;
             txtName.Text = pname;
+            cboManager.Text = pmanager;
             dtpStart.Value = Convert.ToDateTime(date[0]);
             dtpEnd.Value = Convert.ToDateTime(date[1]);
             this.pid = Convert.ToInt32(pid);
@@ -74,9 +75,16 @@ namespace WindowsFormsApp1
                 clbName.Items.Add(name.ENAME);
             }
 
+            List<Name> manlist = getManager();
+            foreach (var item in manlist)
+            {
+                cboManager.Items.Add(item.ENAME);
+            }
+
             if (!isUpdate)
             {
                 cboCode.Text = "==선택==";
+                cboManager.Text = "==선택==";
             }
             else
             {
@@ -123,7 +131,7 @@ namespace WindowsFormsApp1
         {
             using (OracleCommand oraCmd = new OracleCommand())
             {
-                oraCmd.CommandText = "SELECT DISTINCT CARDNUMBER FROM Card_Receipt";
+                oraCmd.CommandText = "SELECT DISTINCT CARDNUMBER FROM Card_Data";
                 oraCmd.Connection = oraConn;
                 oraCmd.Connection.Open();
                 OracleDataReader reader = oraCmd.ExecuteReader();
@@ -138,6 +146,20 @@ namespace WindowsFormsApp1
             using (OracleCommand oraCmd = new OracleCommand())
             {
                 oraCmd.CommandText = "SELECT Ename FROM employee";
+                oraCmd.Connection = oraConn;
+                oraCmd.Connection.Open();
+                OracleDataReader reader = oraCmd.ExecuteReader();
+                List<Name> list = Helper.DataReaderMapToList<Name>(reader);
+                oraCmd.Connection.Close();
+                return list;
+            }
+        }
+
+        private List<Name> getManager()
+        {
+            using (OracleCommand oraCmd = new OracleCommand())
+            {
+                oraCmd.CommandText = "SELECT Ename FROM employee WHERE position_lv < 3";
                 oraCmd.Connection = oraConn;
                 oraCmd.Connection.Open();
                 OracleDataReader reader = oraCmd.ExecuteReader();
@@ -185,6 +207,7 @@ namespace WindowsFormsApp1
             Project pj = new Project();
             pj.ProjectCode = cboCode.Text;
             pj.ProjectName = txtName.Text;
+            pj.Manager = cboManager.Text;
             pj.ProjectDate = $"{dtpStart.Value.ToString("yyyy-MM-dd")} ~ {dtpEnd.Value.ToString("yyyy-MM-dd")}";
             pj.Member = namesb.ToString();
             pj.CardNumber = cardsb.ToString();
@@ -195,11 +218,11 @@ namespace WindowsFormsApp1
                 {
                     if(!isUpdate)
                     {
-                        oraCmd.CommandText = "INSERT INTO Project (projectid, projectcode, projectname, projectdate, cardnumber, member) VALUES (Project_ID.nextval, :projectcode, :projectname, :projectdate, :cardnumber, :member) ";
+                        oraCmd.CommandText = "INSERT INTO Project (projectid, projectcode, projectname, projectdate, cardnumber, member, manager) VALUES (Project_ID.nextval, :projectcode, :projectname, :projectdate, :cardnumber, :member, :manager)";
                     }
                     else
                     {
-                        oraCmd.CommandText = $"UPDATE Project SET  projectcode = :projectcode , projectname =:projectname, projectdate=:projectdate, cardnumber=:cardnumber, member =:member WHERE ProjectId = {pid}";
+                        oraCmd.CommandText = $"UPDATE Project SET  projectcode = :projectcode , projectname =:projectname, projectdate=:projectdate, cardnumber=:cardnumber, member =:member, manager=:manager WHERE ProjectId = {pid}";
                     }
                     oraCmd.Connection = oraConn;
                     oraCmd.Connection.Open();
@@ -208,6 +231,7 @@ namespace WindowsFormsApp1
                     oraCmd.Parameters.Add(new OracleParameter("projectdate", pj.ProjectDate));
                     oraCmd.Parameters.Add(new OracleParameter("cardnumber", pj.CardNumber));
                     oraCmd.Parameters.Add(new OracleParameter("member", pj.Member));
+                    oraCmd.Parameters.Add(new OracleParameter("manager", pj.Manager));
                     oraCmd.ExecuteNonQuery();
 
                     MessageBox.Show("저장완료");

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -22,17 +23,25 @@ namespace WindowsFormsApp1
         public CardInUp()
         {
             InitializeComponent();
+            OracleConnStr();
         }
 
         public CardInUp(string cardNum, string user, string limit , string cardID)
         {
             InitializeComponent();
+            OracleConnStr();
             isUpdate = true;
 
             this.user = user;
             this.limit = limit;
             this.cid = Convert.ToInt32(cardID);
             cardnum = cardNum.Split('-');
+        }
+
+        private void OracleConnStr()
+        {
+            string connStr = ConfigurationManager.ConnectionStrings["MyDB"].ConnectionString;
+            oraConn = new OracleConnection(connStr);
         }
 
         private void KeypressNum(object sender, KeyPressEventArgs e)
@@ -91,7 +100,7 @@ namespace WindowsFormsApp1
                 {
                     if (!isUpdate)
                     {
-                        oraCmd.CommandText = "INSERT INTO Card_Data (cardid, cardnumber, carduser, cardlimit) VALUES (Card_Id.nextval, :cardnumber, :carduser, :cardlimit) ";
+                        oraCmd.CommandText = "INSERT INTO Card_Data (cardid, cardnumber, carduser, cardlimit) VALUES (Card_ID.nextval, :cardnumber, :carduser, :cardlimit) ";
                     }
                     else
                     {

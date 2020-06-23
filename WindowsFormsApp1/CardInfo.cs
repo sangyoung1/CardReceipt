@@ -27,13 +27,7 @@ namespace WindowsFormsApp1
 
         private void CardInfo_Load(object sender, EventArgs e)
         {
-            cardlist = getCardData();
-            dataGridView1.DataSource = cardlist;
-            
-            dataGridView1.Columns[0].HeaderText = "카드번호";
-            dataGridView1.Columns[1].HeaderText = "카드담당자";
-            dataGridView1.Columns[2].HeaderText = "카드한도";
-            dataGridView1.Columns[3].Visible = false;
+            DataBindig();
         }
 
         private List<CardData> getCardData()
@@ -61,7 +55,7 @@ namespace WindowsFormsApp1
             CardInUp frm = new CardInUp();
             if(frm.ShowDialog() == DialogResult.OK)
             {
-
+                DataBindig();
             }
         }
 
@@ -75,8 +69,22 @@ namespace WindowsFormsApp1
             CardInUp frm = new CardInUp(cardNum, cardUser, cardLimit, cardID);
             if (frm.ShowDialog() == DialogResult.OK)
             {
-
+                DataBindig();
             }
+        }
+
+        private void DataBindig()
+        {
+            cardlist = getCardData();
+            dataGridView1.DataSource = cardlist;
+
+            dataGridView1.Columns[0].HeaderText = "카드번호";
+            dataGridView1.Columns[1].HeaderText = "카드담당자";
+            dataGridView1.Columns[2].HeaderText = "카드한도";
+            dataGridView1.Columns[3].Visible = false;
+
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            
         }
     }
 }

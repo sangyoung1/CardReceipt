@@ -41,7 +41,7 @@
             this.btnInsert.Location = new System.Drawing.Point(42, 385);
             this.btnInsert.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnInsert.Name = "btnInsert";
-            this.btnInsert.Size = new System.Drawing.Size(106, 55);
+            this.btnInsert.Size = new System.Drawing.Size(82, 55);
             this.btnInsert.TabIndex = 9;
             this.btnInsert.Text = "등록";
             this.btnInsert.UseVisualStyleBackColor = true;
@@ -49,7 +49,7 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(740, 385);
+            this.btnClose.Location = new System.Drawing.Point(416, 385);
             this.btnClose.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(106, 55);
@@ -60,20 +60,20 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(344, 385);
+            this.btnDelete.Location = new System.Drawing.Point(237, 385);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(106, 55);
+            this.btnDelete.Size = new System.Drawing.Size(82, 55);
             this.btnDelete.TabIndex = 7;
             this.btnDelete.Text = "삭제";
             this.btnDelete.UseVisualStyleBackColor = true;
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(192, 385);
+            this.btnUpdate.Location = new System.Drawing.Point(140, 385);
             this.btnUpdate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(106, 55);
+            this.btnUpdate.Size = new System.Drawing.Size(82, 55);
             this.btnUpdate.TabIndex = 6;
             this.btnUpdate.Text = "수정";
             this.btnUpdate.UseVisualStyleBackColor = true;
@@ -90,14 +90,14 @@
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(805, 346);
+            this.dataGridView1.Size = new System.Drawing.Size(480, 346);
             this.dataGridView1.TabIndex = 5;
             // 
             // CardInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(898, 457);
+            this.ClientSize = new System.Drawing.Size(558, 457);
             this.Controls.Add(this.btnInsert);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnDelete);

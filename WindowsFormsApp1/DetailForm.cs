@@ -17,9 +17,10 @@ namespace WindowsFormsApp1
         OracleConnection oraConn;
         string fdate;
         string sdate;
+        string cardnum;
         List<Details> detaillist;
 
-        public DetailForm(string date1, string date2)
+        public DetailForm(string date1, string date2, string cardnum)
         {
             InitializeComponent();
             string connStr = ConfigurationManager.ConnectionStrings["MyDB"].ConnectionString;
@@ -27,6 +28,7 @@ namespace WindowsFormsApp1
 
             fdate = date1;
             sdate = date2;
+            this.cardnum = cardnum;
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -36,20 +38,20 @@ namespace WindowsFormsApp1
 
         private List<Details> getDetails()
         {
-            List<Details> list = new List<Details>();
             using (OracleCommand oraCmd = new OracleCommand())
             {
-                oraCmd.CommandText = "select usedate, useplace, cardnumber, amount, purpose, classification, content, username from card_receipt where usedate between :date1 and :date2";
+                oraCmd.CommandText = "select usedate, useplace, cardnumber, amount, purpose, classification, content, username from card_receipt where usedate between :date1 and :date2 and cardnumber = :cardnumber";
                 oraCmd.Connection = oraConn;
                 oraCmd.Connection.Open();
                 oraCmd.Parameters.Clear();
                 oraCmd.Parameters.Add(new OracleParameter("date1", fdate));
                 oraCmd.Parameters.Add(new OracleParameter("date2", sdate));
+                oraCmd.Parameters.Add(new OracleParameter("cardnumber", cardnum));
                 OracleDataReader reader = oraCmd.ExecuteReader();
-                list = Helper.DataReaderMapToList<Details>(reader);
+                List<Details> list = Helper.DataReaderMapToList<Details>(reader);
                 oraCmd.Connection.Close();
+                return list;
             }
-            return list;
         }
 
         private void DetailForm_Load(object sender, EventArgs e)
@@ -62,7 +64,10 @@ namespace WindowsFormsApp1
             dataGridView1.Columns[3].HeaderText = "사용금액";
             dataGridView1.Columns[4].HeaderText = "용도";
             dataGridView1.Columns[5].HeaderText = "코드분류";
-            dataGridView1.Columns[6].HeaderText = "사용자";
+            dataGridView1.Columns[6].HeaderText = "내용";
+            dataGridView1.Columns[7].HeaderText = "사용자";
+
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
     }
 }

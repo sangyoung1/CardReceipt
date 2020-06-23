@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,7 +20,7 @@ namespace WindowsFormsApp1
         public string CLASSIFICATION { get; set; }
         public string CONTENT { get; set; }
         public string DEPARTMENT { get; set; }
-        public string USERNAEM { get; set; }
+        public string USERNAME { get; set; }
         public string RESOLUTION { get; set; }
         public string OTHERS { get; set; }
     }
@@ -41,14 +42,17 @@ namespace WindowsFormsApp1
 
     public class ProAmount
     {
-        public string ProjectCode { get; set; }
+        public string UserName { get; set; }
+        public string CardNumber { get; set; }
         public decimal Amount { get; set; }
+        public decimal Remain { get; set; }
     }
     
     public class Project
     {
         public string ProjectCode { get; set; }
         public string ProjectName { get; set; }
+        public string Manager { get; set; }
         public string ProjectDate { get; set; }
         public string CardNumber { get; set; }
         public string Member { get; set; }
@@ -64,15 +68,15 @@ namespace WindowsFormsApp1
         public string PURPOSE { get; set; }
         public string CLASSIFICATION { get; set; }
         public string CONTENT { get; set; }
-        public string USERNAEM { get; set; }
+        public string USERNAME { get; set; }
     }
 
     public class CardData
     {
-        public string CardID { get; set; }
         public string CardNumber { get; set; }
         public string CardUser { get; set; }
         public string CardLimit { get; set; }
+        public decimal CardID { get; set; }
     
     }
 }
