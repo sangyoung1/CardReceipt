@@ -18,10 +18,12 @@ namespace WindowsFormsApp1
     {
         OracleConnection oraConn;
         bool isUpdate = false;
+        bool isLimit = false;
         int pid = 0;
         string[] date;
         string[] card;
         string[] name;
+        string limit = string.Empty;
 
         public Form2()
         {
@@ -29,10 +31,12 @@ namespace WindowsFormsApp1
             OracleConnStr();
         }
 
-        public Form2(string pcode, string pname, string pdate, string pcard, string pmember, string pid, string pmanager)
+        public Form2(string pcode, string pname, string pdate, string pcard, string pmember, string pid, string pmanager, string plimit)
         {
             InitializeComponent();
             OracleConnStr();
+            btnLimit.Visible = true;
+            txtLimit.Enabled = false;
             isUpdate = true;
             date = pdate.Replace(" ", "").Split('~');
             card = pcard.Replace(" ", "").Split(',');
@@ -40,6 +44,7 @@ namespace WindowsFormsApp1
             cboCode.Text = pcode;
             txtName.Text = pname;
             cboManager.Text = pmanager;
+            txtLimit.Text = limit = plimit;
             dtpStart.Value = Convert.ToDateTime(date[0]);
             dtpEnd.Value = Convert.ToDateTime(date[1]);
             this.pid = Convert.ToInt32(pid);
@@ -53,6 +58,7 @@ namespace WindowsFormsApp1
 
         private void Form2_Load(object sender, EventArgs e)
         {
+            btnLimit.Visible = false;
             List<Code> codelist = getProjectCode();
             foreach (var item in codelist)
             {
@@ -89,6 +95,7 @@ namespace WindowsFormsApp1
             else
             {
                 button1.Text = "수정";
+                btnLimit.Visible = true;
                 for (int i = 0; i < card.Length; i++)
                 {
                     for (int j = 0; j < clbCard.Items.Count; j++)
@@ -208,6 +215,7 @@ namespace WindowsFormsApp1
             pj.ProjectCode = cboCode.Text;
             pj.ProjectName = txtName.Text;
             pj.Manager = cboManager.Text;
+            pj.ProjectLimit = txtLimit.Text;
             pj.ProjectDate = $"{dtpStart.Value.ToString("yyyy-MM-dd")} ~ {dtpEnd.Value.ToString("yyyy-MM-dd")}";
             pj.Member = namesb.ToString();
             pj.CardNumber = cardsb.ToString();
@@ -218,11 +226,11 @@ namespace WindowsFormsApp1
                 {
                     if(!isUpdate)
                     {
-                        oraCmd.CommandText = "INSERT INTO Project (projectid, projectcode, projectname, projectdate, cardnumber, member, manager) VALUES (Project_ID.nextval, :projectcode, :projectname, :projectdate, :cardnumber, :member, :manager)";
+                        oraCmd.CommandText = "INSERT INTO Project (projectid, projectcode, projectname, projectdate, cardnumber, member, manager, projectlimit) VALUES (Project_ID.nextval, :projectcode, :projectname, :projectdate, :cardnumber, :member, :manager, :projectlimit)";
                     }
                     else
                     {
-                        oraCmd.CommandText = $"UPDATE Project SET  projectcode = :projectcode , projectname =:projectname, projectdate=:projectdate, cardnumber=:cardnumber, member =:member, manager=:manager WHERE ProjectId = {pid}";
+                        oraCmd.CommandText = $"UPDATE Project SET projectcode = :projectcode , projectname =:projectname, projectdate=:projectdate, cardnumber=:cardnumber, member =:member, manager=:manager, projectlimit=:projectlimit WHERE ProjectId = {pid}";
                     }
                     oraCmd.Connection = oraConn;
                     oraCmd.Connection.Open();
@@ -232,7 +240,18 @@ namespace WindowsFormsApp1
                     oraCmd.Parameters.Add(new OracleParameter("cardnumber", pj.CardNumber));
                     oraCmd.Parameters.Add(new OracleParameter("member", pj.Member));
                     oraCmd.Parameters.Add(new OracleParameter("manager", pj.Manager));
+                    oraCmd.Parameters.Add(new OracleParameter("projectlimit", pj.ProjectLimit));
                     oraCmd.ExecuteNonQuery();
+
+                    if(isLimit)
+                    {
+                        oraCmd.CommandText = "INSERT INTO Limit_Log (ProjectCode, Before, After, Dated) VALUES (:ProjectCode, :Before, :After, sysdate)";
+                        oraCmd.Parameters.Clear();
+                        oraCmd.Parameters.Add(new OracleParameter("ProjectCode", pj.ProjectCode));
+                        oraCmd.Parameters.Add(new OracleParameter("Before", limit));
+                        oraCmd.Parameters.Add(new OracleParameter("After", pj.ProjectLimit));
+                        oraCmd.ExecuteNonQuery();
+                    }
 
                     MessageBox.Show("저장완료");
                     this.DialogResult = DialogResult.OK;
@@ -262,6 +281,12 @@ namespace WindowsFormsApp1
                     oraCmd.Connection.Close();
                 }
             }
+        }
+
+        private void btnLimit_Click(object sender, EventArgs e)
+        {
+            txtLimit.Enabled = true;
+            isLimit = true;
         }
     }
 }

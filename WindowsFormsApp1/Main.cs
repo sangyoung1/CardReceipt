@@ -123,6 +123,11 @@ namespace WindowsFormsApp1
                         ct.CONTENT = con[4].ToString();
                     }
                 }
+                if(ct.AMOUNT.Contains('-'))
+                {
+                    i++;
+                    continue;
+                }
                 cardlist.Add(ct);
             }
             dataGridView1.DataSource = cardlist;
@@ -156,7 +161,7 @@ namespace WindowsFormsApp1
                 oraCmd.CommandText = @"insert into card_receipt (type, usedate, useplace, card, cardnumber, amount, purpose, projectcode, classification, content, department, username, resolution, others) 
 select :type, :usedate, :useplace, :card, :cardnumber, :amount, :purpose, :projectcode, :classification, :content, :department, :username, :resolution, :others
 from dual
-where not exists(select 1 from card_receipt where usedate = :usedate)";
+where not exists(select 1 from card_receipt where usedate = :usedate and cardnumber = :cardnumber)";
                 oraCmd.Connection = oraConn;
                 foreach (var item in cardlist)
                 {

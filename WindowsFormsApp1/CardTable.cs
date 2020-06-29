@@ -42,10 +42,10 @@ namespace WindowsFormsApp1
 
     public class ProAmount
     {
+        public string ProjectCode { get; set; }
         public string UserName { get; set; }
         public string CardNumber { get; set; }
         public decimal Amount { get; set; }
-        public decimal Remain { get; set; }
     }
     
     public class Project
@@ -57,6 +57,7 @@ namespace WindowsFormsApp1
         public string CardNumber { get; set; }
         public string Member { get; set; }
         public decimal ProjectId { get; set; }
+        public string ProjectLimit { get; set; }
     }
 
     public class Details

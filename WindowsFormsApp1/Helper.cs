@@ -30,7 +30,7 @@ namespace WindowsFormsApp1
                 }
                 return list;
             }
-            catch 
+            catch
             {
                 return null;
             }
@@ -81,8 +81,7 @@ namespace WindowsFormsApp1
             {
                 Type propType = info.PropertyType;
                 //Nullable types should be handled too
-                if (propType.IsGenericType
-                    && propType.GetGenericTypeDefinition() == typeof(Nullable<>))
+                if (propType.IsGenericType && propType.GetGenericTypeDefinition() == typeof(Nullable<>))
                 {
                     table.Columns.Add(info.Name, Nullable.GetUnderlyingType(propType));
                 }
@@ -97,8 +96,7 @@ namespace WindowsFormsApp1
                 row = table.NewRow();
                 for (int i = 0; i < table.Columns.Count; i++)
                 {
-                    row[i] = infos[i].GetValue(record) != null ?
- infos[i].GetValue(record) : DBNull.Value;
+                    row[i] = infos[i].GetValue(record) != null ? infos[i].GetValue(record) : DBNull.Value;
                 }
                 table.Rows.Add(row);
             }

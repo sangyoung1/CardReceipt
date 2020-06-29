@@ -44,11 +44,15 @@
             this.clbName = new System.Windows.Forms.CheckedListBox();
             this.cboManager = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtLimit = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.btnLimit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(401, 452);
+            this.button1.Location = new System.Drawing.Point(408, 483);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 42);
@@ -59,7 +63,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(301, 452);
+            this.button2.Location = new System.Drawing.Point(308, 483);
             this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 42);
@@ -144,7 +148,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(28, 236);
+            this.label5.Location = new System.Drawing.Point(28, 262);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(37, 15);
             this.label5.TabIndex = 10;
@@ -153,7 +157,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(28, 342);
+            this.label6.Location = new System.Drawing.Point(28, 368);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(67, 15);
             this.label6.TabIndex = 11;
@@ -162,7 +166,7 @@
             // clbCard
             // 
             this.clbCard.FormattingEnabled = true;
-            this.clbCard.Location = new System.Drawing.Point(158, 230);
+            this.clbCard.Location = new System.Drawing.Point(158, 256);
             this.clbCard.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.clbCard.Name = "clbCard";
             this.clbCard.Size = new System.Drawing.Size(187, 84);
@@ -171,7 +175,7 @@
             // clbName
             // 
             this.clbName.FormattingEnabled = true;
-            this.clbName.Location = new System.Drawing.Point(158, 335);
+            this.clbName.Location = new System.Drawing.Point(158, 361);
             this.clbName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.clbName.Name = "clbName";
             this.clbName.Size = new System.Drawing.Size(187, 104);
@@ -195,11 +199,52 @@
             this.label7.TabIndex = 15;
             this.label7.Text = "프로젝트 담당자";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(28, 223);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(102, 15);
+            this.label8.TabIndex = 18;
+            this.label8.Text = "프로젝트 한도";
+            // 
+            // txtLimit
+            // 
+            this.txtLimit.Location = new System.Drawing.Point(158, 216);
+            this.txtLimit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtLimit.Name = "txtLimit";
+            this.txtLimit.Size = new System.Drawing.Size(135, 25);
+            this.txtLimit.TabIndex = 17;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(299, 223);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(22, 15);
+            this.label9.TabIndex = 19;
+            this.label9.Text = "원";
+            // 
+            // btnLimit
+            // 
+            this.btnLimit.Location = new System.Drawing.Point(327, 216);
+            this.btnLimit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnLimit.Name = "btnLimit";
+            this.btnLimit.Size = new System.Drawing.Size(75, 27);
+            this.btnLimit.TabIndex = 20;
+            this.btnLimit.Text = "금액변경";
+            this.btnLimit.UseVisualStyleBackColor = true;
+            this.btnLimit.Click += new System.EventHandler(this.btnLimit_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(513, 515);
+            this.ClientSize = new System.Drawing.Size(513, 536);
+            this.Controls.Add(this.btnLimit);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.txtLimit);
             this.Controls.Add(this.cboManager);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.clbName);
@@ -243,5 +288,9 @@
         private System.Windows.Forms.CheckedListBox clbName;
         private System.Windows.Forms.ComboBox cboManager;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtLimit;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button btnLimit;
     }
 }
