@@ -218,7 +218,7 @@
             this.Controls.Add(this.txtCardNum1);
             this.Controls.Add(this.label1);
             this.Name = "CardInUp";
-            this.Text = "CardInUp";
+            this.Text = "카드정보관리";
             this.Load += new System.EventHandler(this.CardInUp_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

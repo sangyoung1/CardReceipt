@@ -61,7 +61,7 @@
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.dataGridView1);
             this.Name = "DetailForm";
-            this.Text = "Detail";
+            this.Text = "카드상세내역";
             this.Load += new System.EventHandler(this.DetailForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);

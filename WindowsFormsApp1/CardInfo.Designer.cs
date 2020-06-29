@@ -105,7 +105,7 @@
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.dataGridView1);
             this.Name = "CardInfo";
-            this.Text = "CardInfo";
+            this.Text = "카드정보관리";
             this.Load += new System.EventHandler(this.CardInfo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
